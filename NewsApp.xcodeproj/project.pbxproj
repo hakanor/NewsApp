@@ -17,6 +17,7 @@
 		A73F8B522882F0D70038F31B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73F8B512882F0D70038F31B /* HomeViewController.swift */; };
 		A76437EF288898F800D2CFF5 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437EE288898F800D2CFF5 /* ThemeColors.swift */; };
 		A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */; };
+		A76437F32888AF8600D2CFF5 /* TextField + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F22888AF8600D2CFF5 /* TextField + Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A73F8B512882F0D70038F31B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A76437EE288898F800D2CFF5 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
+		A76437F22888AF8600D2CFF5 /* TextField + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField + Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */,
+				A76437F22888AF8600D2CFF5 /* TextField + Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A73F8B502882F0BC0038F31B /* BookmarksViewController.swift in Sources */,
+				A76437F32888AF8600D2CFF5 /* TextField + Image.swift in Sources */,
 				A73F8B392881FA7D0038F31B /* MainViewController.swift in Sources */,
 				A73F8B352881FA7D0038F31B /* AppDelegate.swift in Sources */,
 				A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */,

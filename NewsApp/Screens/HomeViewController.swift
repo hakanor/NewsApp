@@ -37,21 +37,15 @@ class HomeViewController: UIViewController {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Search"
-        textField.backgroundColor = themeColors.greyPrimary
-        
-        textField.leftViewMode = UITextField.ViewMode.always
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let image = UIImage(systemName: "sun.max")
-        imageView.image = image
-        textField.leftView = imageView
-
-        textField.rightViewMode = UITextField.ViewMode.always
-        let imageViewRight = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let imageRight = UIImage(systemName: "sun.max")
-        imageViewRight.image = imageRight
-        textField.rightView = imageViewRight
-        
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Search",
+            attributes: [NSAttributedString.Key.foregroundColor: themeColors.blackDarker.withAlphaComponent(0.6)]
+        )
+        textField.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        textField.backgroundColor = themeColors.purpleLighter
+        textField.leftImage(UIImage(named: "search")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
+        textField.rightImage(UIImage(named: "microphone")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
+        textField.layer.cornerRadius = 10
         return textField
        }()
     
@@ -79,7 +73,7 @@ class HomeViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 56).isActive = true
         
         tableView.topAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
@@ -88,7 +82,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

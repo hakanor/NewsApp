@@ -10,7 +10,6 @@ import UIKit
 class MainViewController: UITabBarController {
     
 //    MARK: - Tabbar View Controllers
-    
     let homeVC = UINavigationController(rootViewController: HomeViewController())
     let bookmarksVC = UINavigationController(rootViewController: BookmarksViewController())
     let profileVC = UINavigationController(rootViewController: ProfileViewController())
@@ -24,11 +23,10 @@ class MainViewController: UITabBarController {
     
 //    MARK: - Configuration
     func setTabbarItems(){
-        homeVC.tabBarItem.image = UIImage(systemName: "house")
-        bookmarksVC.tabBarItem.image = UIImage(systemName: "house")
-        profileVC.tabBarItem.image = UIImage(systemName: "house")
-        tabBar.isTranslucent = true
-        tabBar.tintColor = .label
+        homeVC.tabBarItem.image = UIImage(named: "estate")
+        bookmarksVC.tabBarItem.image = UIImage(named: "bookmark")
+        profileVC.tabBarItem.image = UIImage(named: "user")
+        tabBar.tintColor = themeColors.purplePrimary
     }
 
 }
