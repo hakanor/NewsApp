@@ -7,13 +7,29 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
-
+class MainViewController: UITabBarController {
+    
+//    MARK: - Tabbar View Controllers
+    
+    let homeVC = UINavigationController(rootViewController: HomeViewController())
+    let bookmarksVC = UINavigationController(rootViewController: BookmarksViewController())
+    let profileVC = UINavigationController(rootViewController: ProfileViewController())
+    
+//    MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        setViewControllers([homeVC,bookmarksVC,profileVC], animated: true)
+        setTabbarItems()
     }
-
+    
+//    MARK: - Configuration
+    func setTabbarItems(){
+        homeVC.tabBarItem.image = UIImage(systemName: "house")
+        bookmarksVC.tabBarItem.image = UIImage(systemName: "house")
+        profileVC.tabBarItem.image = UIImage(systemName: "house")
+        tabBar.isTranslucent = true
+        tabBar.tintColor = .label
+    }
 
 }
 
