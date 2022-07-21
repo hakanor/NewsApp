@@ -93,7 +93,4 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
         cell.setHomeTableViewCellLabels(articleImage: UIImage(named: "kyk")!, titleLabel: "selamsssssssssssssssssssssssssadsadashdvasjdajsdasjhdsjavdjhsavdjhasvdjhsavdhjasvdsahj")
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        272
-    }
 }

@@ -68,15 +68,17 @@ class HomeTableViewCell: UITableViewCell {
         articleImage.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         articleImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         articleImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        articleImage.heightAnchor.constraint(equalToConstant: 192).isActive = true
         
         titleLabel.topAnchor.constraint(equalTo: articleImage.bottomAnchor,constant: 20).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,constant: 20).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -20).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: bookmarkIcon.leadingAnchor).isActive = true
-
-        bookmarkIcon.topAnchor.constraint(equalTo: articleImage.bottomAnchor,constant: 20).isActive = true
-        bookmarkIcon.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -20).isActive = true
-        bookmarkIcon.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -20).isActive = true
+        
+        bookmarkIcon.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 20).isActive = true
+        bookmarkIcon.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true
+        bookmarkIcon.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        bookmarkIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        bookmarkIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
     }
     
     required init?(coder: NSCoder) {
