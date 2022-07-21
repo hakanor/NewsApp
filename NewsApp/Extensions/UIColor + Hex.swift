@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension UIColor {
+//   static let purpleDarker = UIColor(hexString: "#2536A7")
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt64()

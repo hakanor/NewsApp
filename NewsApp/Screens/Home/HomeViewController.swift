@@ -90,7 +90,7 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
-        cell.setHomeTableViewCellLabels(articleImage: UIImage(named: "bookmark")!, titleLabel: "selamsssssssssssssssssssssssssadsadashdvasjdajsdasjhdsjavdjhsavdjhasvdjhsavdhjasvdsahj")
+        cell.setHomeTableViewCellLabels(articleImage: UIImage(named: "kyk")!, titleLabel: "selamsssssssssssssssssssssssssadsadashdvasjdajsdasjhdsjavdjhsavdjhasvdjhsavdhjasvdsahj")
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -10,6 +10,9 @@ import UIKit
 
 class HomeTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
+    let cornerRadiusValue : CGFloat = 16
+    
     // MARK: - Subviews
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -23,6 +26,9 @@ class HomeTableViewCell: UITableViewCell {
         articleImage.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "bookmark")
         articleImage.image = image
+        articleImage.clipsToBounds = true
+        articleImage.layer.cornerRadius = cornerRadiusValue
+        articleImage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return articleImage
     }()
     
@@ -52,8 +58,8 @@ class HomeTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         contentView.addSubview(containerView)
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         
@@ -79,7 +85,7 @@ class HomeTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.layer.cornerRadius = 16
+        containerView.layer.cornerRadius = cornerRadiusValue
         containerView.layer.borderColor = themeColors.greyLight.cgColor
         containerView.layer.borderWidth = 0.2
     }

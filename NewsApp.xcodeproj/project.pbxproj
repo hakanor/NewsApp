@@ -116,7 +116,7 @@
 		A73F8B4C2882E84E0038F31B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				A76437F428894AE600D2CFF5 /* Home Screens */,
+				A76437F428894AE600D2CFF5 /* Home */,
 				A73F8B382881FA7D0038F31B /* MainViewController.swift */,
 				A73F8B4D2882F0920038F31B /* ProfileViewController.swift */,
 				A73F8B4F2882F0BC0038F31B /* BookmarksViewController.swift */,
@@ -124,13 +124,13 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		A76437F428894AE600D2CFF5 /* Home Screens */ = {
+		A76437F428894AE600D2CFF5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				A73F8B512882F0D70038F31B /* HomeViewController.swift */,
 				A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */,
 			);
-			path = "Home Screens";
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
