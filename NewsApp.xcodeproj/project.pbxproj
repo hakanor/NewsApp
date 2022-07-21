@@ -18,6 +18,7 @@
 		A76437EF288898F800D2CFF5 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437EE288898F800D2CFF5 /* ThemeColors.swift */; };
 		A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */; };
 		A76437F32888AF8600D2CFF5 /* TextField + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F22888AF8600D2CFF5 /* TextField + Image.swift */; };
+		A76437F628894B1200D2CFF5 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A76437EE288898F800D2CFF5 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
 		A76437F22888AF8600D2CFF5 /* TextField + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField + Image.swift"; sourceTree = "<group>"; };
+		A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +116,21 @@
 		A73F8B4C2882E84E0038F31B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				A76437F428894AE600D2CFF5 /* Home Screens */,
 				A73F8B382881FA7D0038F31B /* MainViewController.swift */,
 				A73F8B4D2882F0920038F31B /* ProfileViewController.swift */,
 				A73F8B4F2882F0BC0038F31B /* BookmarksViewController.swift */,
-				A73F8B512882F0D70038F31B /* HomeViewController.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		A76437F428894AE600D2CFF5 /* Home Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A73F8B512882F0D70038F31B /* HomeViewController.swift */,
+				A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */,
+			);
+			path = "Home Screens";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +209,7 @@
 				A73F8B352881FA7D0038F31B /* AppDelegate.swift in Sources */,
 				A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */,
 				A73F8B4E2882F0920038F31B /* ProfileViewController.swift in Sources */,
+				A76437F628894B1200D2CFF5 /* HomeTableViewCell.swift in Sources */,
 				A76437EF288898F800D2CFF5 /* ThemeColors.swift in Sources */,
 				A73F8B372881FA7D0038F31B /* SceneDelegate.swift in Sources */,
 				A73F8B522882F0D70038F31B /* HomeViewController.swift in Sources */,

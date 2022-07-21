@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
     func configurateTableView(){
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
     }
     
     override func viewDidLoad() {
@@ -72,10 +73,12 @@ class HomeViewController: UIViewController {
         textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 56).isActive = true
         
-        tableView.topAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: textField.bottomAnchor,constant: 24).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
+        
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "HomeTableViewCell")
     }
 
 }
@@ -86,9 +89,11 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "sds"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
+        cell.setHomeTableViewCellLabels(articleImage: UIImage(named: "bookmark")!, titleLabel: "selamsssssssssssssssssssssssssadsadashdvasjdajsdasjhdsjavdjhsavdjhasvdjhsavdhjasvdsahj")
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        272
+    }
 }
