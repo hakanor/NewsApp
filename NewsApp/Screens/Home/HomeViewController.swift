@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SafariServices
 
 class HomeViewController: UIViewController {
 
 //    MARK: - ViewModels
     private var viewModels = [HomeTableViewCellViewModel]()
+    private var articles = [Article]()
     
 //    MARK: - Subviews
     private lazy var tableView: UITableView = {
@@ -61,6 +63,28 @@ class HomeViewController: UIViewController {
         tableView.separatorStyle = .none
     }
     
+//    MARK: - Functions
+    private func fetchNews(){
+        let service = NewsService()
+        service.fetchNewsData { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                self?.viewModels = articles.compactMap({
+                    HomeTableViewCellViewModel(
+                        title: $0.title,
+                        imageURL: URL(string: $0.urlToImage ?? "")
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     
 //    MARK: - Lifecycle
     override func viewDidLoad() {
@@ -87,23 +111,7 @@ class HomeViewController: UIViewController {
         
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "HomeTableViewCell")
         
-        let service = NewsService()
-        service.fetchNewsData { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.viewModels = articles.compactMap({
-                    HomeTableViewCellViewModel(
-                        title: $0.title,
-                        imageURL: URL(string: $0.urlToImage ?? "")
-                    )
-                })
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        fetchNews()
         
         
     }
@@ -120,5 +128,15 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
         cell.configureCells(with: viewModels[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let article = articles[indexPath.row]
+        guard let url = URL(string: article.url ?? "") else {
+            return
+        }
+        let vc = SFSafariViewController(url:url)
+        present(vc,animated: true)
     }
 }

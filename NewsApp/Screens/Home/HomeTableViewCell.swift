@@ -12,6 +12,7 @@ class HomeTableViewCellViewModel {
     let title: String
     let imageURL: URL?
     var imageData: Data?
+    var url: String?
     
     init(
         title: String,
