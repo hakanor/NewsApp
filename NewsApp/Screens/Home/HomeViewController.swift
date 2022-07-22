@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
         textField.backgroundColor = themeColors.purpleLighter
         textField.leftImage(UIImage(named: "search")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
 //        textField.rightImage(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
-//        FIXME: ADD "searchFunc" to textfield.rightButton 
+//        FIXME: ADD "searchFunc" to textfield.rightButton
         textField.rightButton(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
         textField.layer.cornerRadius = 10
         textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)

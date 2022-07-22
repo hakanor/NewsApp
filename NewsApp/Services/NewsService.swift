@@ -58,8 +58,6 @@ extension NewsService {
         var urlString = "https://newsapi.org/v2/everything?sortedBy=popularity&apiKey=\(API_KEY)&q="
         let normalizedString = trimmedQuery.folding(options: .diacriticInsensitive, locale: .current)
         urlString = urlString + normalizedString
-        print(trimmedQuery)
-        print(urlString)
         let url = URL(string: urlString)
         let session = URLSession.shared
         let task = session.dataTask(with: url!) { data, response, error in
