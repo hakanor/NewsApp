@@ -64,6 +64,10 @@ class HomeViewController: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0   )
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
     
 //    MARK: - Functions
@@ -86,6 +90,11 @@ class HomeViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    @objc func refreshFunc(refreshControl: UIRefreshControl) {
+        fetchNews()
+        refreshControl.endRefreshing()
     }
     
     
