@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.cornerRadius = 16
+        tableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return tableView
     }()
     
@@ -61,6 +63,7 @@ class HomeViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0   )
     }
     
 //    MARK: - Functions
@@ -104,7 +107,7 @@ class HomeViewController: UIViewController {
         textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 56).isActive = true
         
-        tableView.topAnchor.constraint(equalTo: textField.bottomAnchor,constant: 24).isActive = true
+        tableView.topAnchor.constraint(equalTo: textField.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
@@ -112,7 +115,6 @@ class HomeViewController: UIViewController {
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "HomeTableViewCell")
         
         fetchNews()
-        
         
     }
 
