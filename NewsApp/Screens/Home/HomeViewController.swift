@@ -51,8 +51,11 @@ class HomeViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         textField.backgroundColor = themeColors.purpleLighter
         textField.leftImage(UIImage(named: "search")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
-        textField.rightImage(UIImage(named: "microphone")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
+//        textField.rightImage(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
+//        FIXME: ADD "searchFunc" to textfield.rightButton 
+        textField.rightButton(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
         textField.layer.cornerRadius = 10
+        textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
         return textField
        }()
     
@@ -91,12 +94,35 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    private func search(){
+        let service = NewsService()
+        service.search(with: textField.text!) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                self?.viewModels = articles.compactMap({
+                    HomeTableViewCellViewModel(
+                        title: $0.title,
+                        imageURL: URL(string: $0.urlToImage ?? "")
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
         fetchNews()
         refreshControl.endRefreshing()
     }
     
+    @objc func searchFunc() {
+        search()
+    }
     
 //    MARK: - Lifecycle
     override func viewDidLoad() {
