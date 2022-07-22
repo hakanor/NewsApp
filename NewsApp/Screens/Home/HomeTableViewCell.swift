@@ -8,6 +8,20 @@
 import Foundation
 import UIKit
 
+class HomeTableViewCellViewModel {
+    let title: String
+    let imageURL: URL?
+    var imageData: Data?
+    
+    init(
+        title: String,
+        imageURL: URL?
+    ) {
+        self.title = title
+        self.imageURL = imageURL
+    }
+}
+
 class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -93,8 +107,31 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configuration
+    
+    // no need for that func anymore
     func setHomeTableViewCellLabels(articleImage: UIImage, titleLabel: String){
         self.titleLabel.text = titleLabel
         self.articleImage.image = articleImage
+    }
+    
+    func configureCells(with viewModel: HomeTableViewCellViewModel){
+        titleLabel.text = viewModel.title
+        
+        if let data = viewModel.imageData {
+            articleImage.image = UIImage(data: data)
+        }
+        else if let url = viewModel.imageURL {
+            URLSession.shared.dataTask(with: url){ data , _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                viewModel.imageData = data
+                DispatchQueue.main.async {
+                    self.articleImage.image = UIImage(data:data)
+                }
+                
+            }.resume()
+        }
+        
     }
 }

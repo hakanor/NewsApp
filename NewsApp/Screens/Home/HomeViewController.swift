@@ -8,6 +8,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+
+//    MARK: - ViewModels
+    private var viewModels = [HomeTableViewCellViewModel]()
     
 //    MARK: - Subviews
     private lazy var tableView: UITableView = {
@@ -53,9 +56,13 @@ class HomeViewController: UIViewController {
     func configurateTableView(){
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
     }
     
+    
+//    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
@@ -79,18 +86,39 @@ class HomeViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
         
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "HomeTableViewCell")
+        
+        let service = NewsService()
+        service.fetchNewsData { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.viewModels = articles.compactMap({
+                    HomeTableViewCellViewModel(
+                        title: $0.title,
+                        imageURL: URL(string: $0.urlToImage ?? "")
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        
     }
 
 }
 
+//    MARK: - TableView Delegate & TableView DataSource
 extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
-        cell.setHomeTableViewCellLabels(articleImage: UIImage(named: "kyk")!, titleLabel: "selamsssssssssssssssssssssssssadsadashdvasjdajsdasjhdsjavdjhsavdjhasvdjhsavdhjasvdsahj")
+        cell.configureCells(with: viewModels[indexPath.row])
         return cell
     }
 }
