@@ -27,6 +27,7 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     let cornerRadiusValue : CGFloat = 16
+    var bookmarkBool : Bool = false
     
     // MARK: - Subviews
     private lazy var containerView: UIView = {
@@ -94,6 +95,10 @@ class HomeTableViewCell: UITableViewCell {
         bookmarkIcon.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         bookmarkIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
         bookmarkIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        let gestureBookmarkIcon = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
+        bookmarkIcon.addGestureRecognizer(gestureBookmarkIcon)
+        bookmarkIcon.isUserInteractionEnabled = true
     }
     
     required init?(coder: NSCoder) {
@@ -108,6 +113,17 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configuration
+    @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
+        print("TAPPED")
+        if bookmarkBool == false {
+            bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(.green)
+            bookmarkBool = true
+        } else {
+            bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.greyPrimary)
+            bookmarkBool = false
+        }
+        
+    }
     
     // no need for that func anymore
     func setHomeTableViewCellLabels(articleImage: UIImage, titleLabel: String){
