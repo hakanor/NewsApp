@@ -170,10 +170,19 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let article = articles[indexPath.row]
-        guard let url = URL(string: article.url ?? "") else {
-            return
-        }
-        let vc = SFSafariViewController(url:url)
-        present(vc,animated: true)
+
+//        guard let url = URL(string: article.url ?? "") else {
+//            return
+//        }
+//        let vc = SFSafariViewController(url:url)
+//        present(vc,animated: true)
+        let vc = ArticleViewController(
+            title: article.title,
+            source: article.source.name,
+            content: article.content ?? "",
+            imageUrl: article.urlToImage ?? ""
+        )
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
