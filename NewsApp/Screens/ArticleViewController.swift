@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SafariServices
 
-class ArticleViewController: UIViewController {    
-//    MARK: - Subviews
+class ArticleViewController: UIViewController {
     
+    private var contentURL = ""
+    
+//    MARK: - Subviews
     private lazy var articleImage: UIImageView = {
         let articleImage = UIImageView()
         articleImage.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +101,9 @@ class ArticleViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
         
+        let gestureSource = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureSource(_:)))
+        sourceLabelContainer.addGestureRecognizer(gestureSource)
+        
         [articleImage, backIcon, bookmarkIcon, shareIcon ,sourceLabel ,sourceLabelContainer, titleLabel, scrollView] .forEach(view.addSubview(_:))
         
         articleImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -148,12 +154,21 @@ class ArticleViewController: UIViewController {
         
     }
     
-    init(title:String, source:String, content:String, imageUrl:String) {
+    @objc func handleTapGestureSource(_ sender: UITapGestureRecognizer? = nil) {
+        guard let url = URL(string: self.contentURL ) else {
+            return
+        }
+        let vc = SFSafariViewController(url:url)
+        present(vc,animated: true)
+    }
+    
+    init(title:String, source:String, content:String, imageUrl:String , url:String) {
         super.init(nibName: nil, bundle: nil)
         self.titleLabel.text = title
         self.sourceLabel.text = source
         self.scrollContent.text = content
         self.articleImage.imageFromUrl(from: imageUrl,contentMode: .scaleAspectFill)
+        self.contentURL = url
     }
     
     required init?(coder: NSCoder) {
