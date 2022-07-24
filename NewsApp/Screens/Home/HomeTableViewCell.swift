@@ -143,7 +143,7 @@ class HomeTableViewCell: UITableViewCell {
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
         if bookmarkBool == false {
-            bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(.green)
+            bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.purpleLight)
             bookmarkBool = true
             saveToCoreData(with: self.model)
         } else {
@@ -183,20 +183,23 @@ class HomeTableViewCell: UITableViewCell {
     }
     private func saveToCoreData(with viewModel: HomeTableViewCellViewModel){
         
-        let newArticle = ArticleEntity(context: self.context)
-        newArticle.url = viewModel.url ?? ""
-        newArticle.content = viewModel.content
-        newArticle.publishedAt = viewModel.publishedAt
-        newArticle.urlToImage = viewModel.urlToImage
-        newArticle.source = viewModel.sourceName
-        newArticle.title = viewModel.title
-        newArticle.subtitle = viewModel.description
+        if (checkObjectExistInCoreData(title:viewModel.title) == false){
+            let newArticle = ArticleEntity(context: self.context)
+            newArticle.url = viewModel.url ?? ""
+            newArticle.content = viewModel.content
+            newArticle.publishedAt = viewModel.publishedAt
+            newArticle.urlToImage = viewModel.urlToImage
+            newArticle.source = viewModel.sourceName
+            newArticle.title = viewModel.title
+            newArticle.subtitle = viewModel.description
 
-        do{
-            try self.context.save()
-        } catch {
-            
+            do{
+                try self.context.save()
+            } catch {
+                
+            }
         }
+        
     }
     
 //    FIXME: NOT WORKING
@@ -220,7 +223,23 @@ class HomeTableViewCell: UITableViewCell {
     
     func checkBookmark (){
         if (bookmarkBool == true){
-            bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(.green)
+            bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.purpleLight)
         }
+    }
+    
+    private func checkObjectExistInCoreData(title:String) -> Bool{
+        var items : [ArticleEntity]?
+        do{
+            items = try self.context.fetch(ArticleEntity.fetchRequest())
+        } catch {
+            
+        }
+        
+        for item in items ?? [] {
+            if(item.title == title){
+                return true
+            }
+        }
+        return false
     }
 }
