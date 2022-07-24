@@ -7,10 +7,13 @@
 
 import UIKit
 import SafariServices
+import CoreData
 
 class ArticleViewController: UIViewController {
     
     private var contentURL = ""
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
 //    MARK: - Subviews
     private lazy var articleImage: UIImageView = {

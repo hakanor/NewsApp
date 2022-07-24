@@ -19,6 +19,7 @@
 		A74911F8288B24D500D51E3D /* String + removeWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74911F7288B24D500D51E3D /* String + removeWhitespace.swift */; };
 		A74911FC288B3E8C00D51E3D /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74911FB288B3E8C00D51E3D /* ArticleViewController.swift */; };
 		A74911FE288C189100D51E3D /* UIImage + Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74911FD288C189000D51E3D /* UIImage + Url.swift */; };
+		A7491201288C982D00D51E3D /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A74911FF288C982C00D51E3D /* NewsApp.xcdatamodeld */; };
 		A76437EF288898F800D2CFF5 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437EE288898F800D2CFF5 /* ThemeColors.swift */; };
 		A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */; };
 		A76437F32888AF8600D2CFF5 /* TextField + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F22888AF8600D2CFF5 /* TextField + Image.swift */; };
@@ -40,6 +41,7 @@
 		A74911F7288B24D500D51E3D /* String + removeWhitespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + removeWhitespace.swift"; sourceTree = "<group>"; };
 		A74911FB288B3E8C00D51E3D /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		A74911FD288C189000D51E3D /* UIImage + Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Url.swift"; sourceTree = "<group>"; };
+		A7491200288C982D00D51E3D /* NewsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsApp.xcdatamodel; sourceTree = "<group>"; };
 		A76437EE288898F800D2CFF5 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
 		A76437F22888AF8600D2CFF5 /* TextField + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField + Image.swift"; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				A73F8B362881FA7D0038F31B /* SceneDelegate.swift */,
 				A73F8B3F2881FA820038F31B /* LaunchScreen.storyboard */,
 				A73F8B422881FA820038F31B /* Info.plist */,
+				A74911FF288C982C00D51E3D /* NewsApp.xcdatamodeld */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				A73F8B392881FA7D0038F31B /* MainViewController.swift in Sources */,
 				A74911FE288C189100D51E3D /* UIImage + Url.swift in Sources */,
 				A73F8B352881FA7D0038F31B /* AppDelegate.swift in Sources */,
+				A7491201288C982D00D51E3D /* NewsApp.xcdatamodeld in Sources */,
 				A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */,
 				A73F8B4E2882F0920038F31B /* ProfileViewController.swift in Sources */,
 				A76437F628894B1200D2CFF5 /* HomeTableViewCell.swift in Sources */,
@@ -434,6 +438,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A74911FF288C982C00D51E3D /* NewsApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A7491200288C982D00D51E3D /* NewsApp.xcdatamodel */,
+			);
+			currentVersion = A7491200288C982D00D51E3D /* NewsApp.xcdatamodel */;
+			path = NewsApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A73F8B292881FA7D0038F31B /* Project object */;
 }

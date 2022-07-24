@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
 //    MARK: - ViewModels
     private var viewModels = [HomeTableViewCellViewModel]()
     private var articles = [Article]()
+    private var items : [ArticleEntity]?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
 //    MARK: - Subviews
     private lazy var tableView: UITableView = {
@@ -82,7 +84,13 @@ class HomeViewController: UIViewController {
                 self?.viewModels = articles.compactMap({
                     HomeTableViewCellViewModel(
                         title: $0.title,
-                        imageURL: URL(string: $0.urlToImage ?? "")
+                        imageURL: URL(string: $0.urlToImage ?? ""),
+                        url : $0.url!,
+                        urlToImage: $0.urlToImage,
+                        publishedAt: $0.publishedAt,
+                        description: $0.description,
+                        content: $0.content,
+                        sourceName : $0.source.name
                     )
                 })
                 DispatchQueue.main.async {
@@ -102,7 +110,13 @@ class HomeViewController: UIViewController {
                 self?.viewModels = articles.compactMap({
                     HomeTableViewCellViewModel(
                         title: $0.title,
-                        imageURL: URL(string: $0.urlToImage ?? "")
+                        imageURL: URL(string: $0.urlToImage ?? ""),
+                        url : $0.url!,
+                        urlToImage: $0.urlToImage,
+                        publishedAt: $0.publishedAt,
+                        description: $0.description,
+                        content: $0.content,
+                        sourceName : $0.source.name
                     )
                 })
                 DispatchQueue.main.async {
@@ -121,6 +135,22 @@ class HomeViewController: UIViewController {
     
     @objc func searchFunc() {
         search()
+    }
+    
+    private func fetchArticlesFromCoreData(){
+        do{
+            self.items = try self.context.fetch(ArticleEntity.fetchRequest())
+        } catch {
+            
+        }
+    }
+    private func isArticleBookmarked(title:String) -> Bool {
+        for item in items ?? [] {
+            if (item.title == title){
+                return true
+            }
+        }
+        return false
     }
     
 //    MARK: - Lifecycle
@@ -149,6 +179,7 @@ class HomeViewController: UIViewController {
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "HomeTableViewCell")
         
         fetchNews()
+        fetchArticlesFromCoreData()
         
     }
 
@@ -163,6 +194,10 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as! HomeTableViewCell
         cell.configureCells(with: viewModels[indexPath.row])
+        if(isArticleBookmarked(title: viewModels[indexPath.row].title)){
+            cell.bookmarkBool = true
+            cell.checkBookmark()
+        }
         return cell
     }
     

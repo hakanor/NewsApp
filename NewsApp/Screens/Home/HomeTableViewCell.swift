@@ -7,26 +7,47 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class HomeTableViewCellViewModel {
     let title: String
     let imageURL: URL?
     var imageData: Data?
     var url: String?
+    var urlToImage: String?
+    var publishedAt: String
+    let description: String?
+    var content: String?
+    var sourceName: String
     
     init(
         title: String,
-        imageURL: URL?
+        imageURL: URL?,
+        url : String?,
+        urlToImage: String?,
+        publishedAt: String,
+        description: String?,
+        content: String?,
+        sourceName : String
     ) {
         self.title = title
         self.imageURL = imageURL
+        self.url = url
+        self.urlToImage = urlToImage
+        self.publishedAt = publishedAt
+        self.description = description
+        self.content = content
+        self.sourceName = sourceName
     }
 }
 
 class HomeTableViewCell: UITableViewCell {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var model = HomeTableViewCellViewModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
     // MARK: - Properties
-    let cornerRadiusValue : CGFloat = 16
+    private let cornerRadiusValue : CGFloat = 16
     var bookmarkBool : Bool = false
     
     // MARK: - Subviews
@@ -72,6 +93,8 @@ class HomeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        checkBookmark()
+        
         selectionStyle = .none
         contentView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
@@ -114,11 +137,12 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
-        print("TAPPED")
         if bookmarkBool == false {
             bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(.green)
             bookmarkBool = true
+            saveToCoreData(with: self.model)
         } else {
+            deleteFromCoreData(with: self.model)
             bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.greyPrimary)
             bookmarkBool = false
         }
@@ -133,6 +157,7 @@ class HomeTableViewCell: UITableViewCell {
     
     func configureCells(with viewModel: HomeTableViewCellViewModel){
         titleLabel.text = viewModel.title
+        self.model = viewModel
         
         if let data = viewModel.imageData {
             articleImage.image = UIImage(data: data)
@@ -150,5 +175,47 @@ class HomeTableViewCell: UITableViewCell {
             }.resume()
         }
         
+    }
+    private func saveToCoreData(with viewModel: HomeTableViewCellViewModel){
+        
+        let newArticle = ArticleEntity(context: self.context)
+        newArticle.url = viewModel.url ?? ""
+        newArticle.content = viewModel.content
+        newArticle.publishedAt = viewModel.publishedAt
+        newArticle.urlToImage = viewModel.urlToImage
+        newArticle.source = viewModel.sourceName
+        newArticle.title = viewModel.title
+        newArticle.subtitle = viewModel.description
+
+        do{
+            try self.context.save()
+        } catch {
+            
+        }
+    }
+    
+//    FIXME: NOT WORKING
+    private func deleteFromCoreData(with viewModel : HomeTableViewCellViewModel){
+        
+        let articleToBeDeleted = ArticleEntity(context: self.context)
+        articleToBeDeleted.url = viewModel.url ?? ""
+        articleToBeDeleted.content = viewModel.content
+        articleToBeDeleted.publishedAt = viewModel.publishedAt
+        articleToBeDeleted.urlToImage = viewModel.urlToImage
+        articleToBeDeleted.source = viewModel.sourceName
+        articleToBeDeleted.title = viewModel.title
+        articleToBeDeleted.subtitle = viewModel.description
+        self.context.delete(articleToBeDeleted)
+        do{
+            try context.save()
+        } catch {
+            
+        }
+    }
+    
+    func checkBookmark (){
+        if (bookmarkBool == true){
+            bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(.green)
+        }
     }
 }
