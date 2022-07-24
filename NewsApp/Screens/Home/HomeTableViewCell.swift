@@ -202,7 +202,7 @@ class HomeTableViewCell: UITableViewCell {
         
     }
     
-//    FIXME: NOT WORKING
+//    FIXME: NOT WORKING -- DeleteFromCoreData
     private func deleteFromCoreData(with viewModel : HomeTableViewCellViewModel){
         
         let articleToBeDeleted = ArticleEntity(context: self.context)
