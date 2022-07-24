@@ -135,6 +135,11 @@ class HomeTableViewCell: UITableViewCell {
         containerView.layer.borderWidth = 0.2
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.greyPrimary)
+    }
+    
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
         if bookmarkBool == false {
