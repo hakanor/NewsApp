@@ -31,6 +31,7 @@ class ArticleViewController: UIViewController {
         icon.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "arrow-left")?.withTintColor(.white)
         icon.image = image
+        icon.isUserInteractionEnabled = true
         icon.clipsToBounds = true
         return icon
     }()
@@ -40,6 +41,7 @@ class ArticleViewController: UIViewController {
         icon.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "bookmark")?.withTintColor(.white)
         icon.image = image
+        icon.isUserInteractionEnabled = true
         icon.clipsToBounds = true
         return icon
     }()
@@ -49,6 +51,7 @@ class ArticleViewController: UIViewController {
         icon.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "share")?.withTintColor(.white)
         icon.image = image
+        icon.isUserInteractionEnabled = true
         icon.clipsToBounds = true
         return icon
     }()
@@ -103,9 +106,12 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         let gestureSource = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureSource(_:)))
         sourceLabelContainer.addGestureRecognizer(gestureSource)
+        let gestureBack = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBack(_:)))
+        backIcon.addGestureRecognizer(gestureBack)
         
         [articleImage, backIcon, bookmarkIcon, shareIcon ,sourceLabel ,sourceLabelContainer, titleLabel, scrollView] .forEach(view.addSubview(_:))
         
@@ -114,12 +120,12 @@ class ArticleViewController: UIViewController {
         articleImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         articleImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
         
-        backIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 24).isActive = true
+        backIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         backIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
         backIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
         backIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
         
-        bookmarkIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 24).isActive = true
+        bookmarkIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         bookmarkIcon.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20).isActive = true
         bookmarkIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
         bookmarkIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
@@ -163,6 +169,11 @@ class ArticleViewController: UIViewController {
         }
         let vc = SFSafariViewController(url:url)
         present(vc,animated: true)
+    }
+    
+    
+    @objc func handleTapGestureBack(_ sender: UITapGestureRecognizer? = nil) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     init(title:String, source:String, content:String, imageUrl:String , url:String) {
