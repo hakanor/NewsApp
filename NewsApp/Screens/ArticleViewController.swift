@@ -13,6 +13,8 @@ class ArticleViewController: UIViewController {
     
     private var contentURL = ""
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var items : [ArticleEntity]?
+    private var bookmarkBool = false
     
     
 //    MARK: - Subviews
@@ -112,6 +114,8 @@ class ArticleViewController: UIViewController {
         sourceLabelContainer.addGestureRecognizer(gestureSource)
         let gestureBack = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBack(_:)))
         backIcon.addGestureRecognizer(gestureBack)
+        let gestureBookmark = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
+        bookmarkIcon.addGestureRecognizer(gestureBookmark)
         
         [articleImage, backIcon, bookmarkIcon, shareIcon ,sourceLabel ,sourceLabelContainer, titleLabel, scrollView] .forEach(view.addSubview(_:))
         
@@ -160,7 +164,6 @@ class ArticleViewController: UIViewController {
         scrollContent.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: -10).isActive = true
         scrollContent.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        
     }
     
     @objc func handleTapGestureSource(_ sender: UITapGestureRecognizer? = nil) {
@@ -176,6 +179,35 @@ class ArticleViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
+        if bookmarkBool == false {
+            print("not bookmarked")
+        } else {
+            print("bookmarked")
+            
+        }
+    }
+    
+    private func fetchArticlesFromCoreData(){
+        do{
+            self.items = try self.context.fetch(ArticleEntity.fetchRequest())
+        } catch {
+            
+        }
+    }
+    
+    private func isArticleBookmarked(title:String) -> Bool {
+        for item in items ?? [] {
+            if (item.title == title){
+                bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.purpleLight)
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    
     init(title:String, source:String, content:String, imageUrl:String , url:String) {
         super.init(nibName: nil, bundle: nil)
         self.titleLabel.text = title
@@ -183,6 +215,8 @@ class ArticleViewController: UIViewController {
         self.scrollContent.text = content
         self.articleImage.imageFromUrl(from: imageUrl,contentMode: .scaleAspectFill)
         self.contentURL = url
+        fetchArticlesFromCoreData()
+        bookmarkBool = isArticleBookmarked(title: title)
     }
     
     required init?(coder: NSCoder) {

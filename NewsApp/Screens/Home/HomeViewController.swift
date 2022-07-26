@@ -138,12 +138,11 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchArticlesFromCoreData(){
-        do{
-            self.items = try self.context.fetch(ArticleEntity.fetchRequest())
-        } catch {
-            
-        }
+        let coreDataService = CoreDataService()
+        coreDataService.fetchArticlesFromCoreData()
+        items = coreDataService.items
     }
+    
     private func isArticleBookmarked(title:String) -> Bool {
         for item in items ?? [] {
             if (item.title == title){

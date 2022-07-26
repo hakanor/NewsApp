@@ -108,6 +108,7 @@ class BookmarksViewController: UIViewController {
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
                 guard let itemsToBeDeleted = items?[indexPath.row] else { return  }
+                print(itemsToBeDeleted)
                 context.delete(itemsToBeDeleted)
                 items?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)

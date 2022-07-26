@@ -142,12 +142,14 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
+        let coreDataService = CoreDataService()
+        
         if bookmarkBool == false {
             bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.purpleLight)
             bookmarkBool = true
-            saveToCoreData(with: self.model)
+            coreDataService.saveToCoreData(with: self.model)
         } else {
-            deleteFromCoreData(with: self.model)
+            coreDataService.deleteFromCoreData(with: self.model)
             bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.greyPrimary)
             bookmarkBool = false
         }
@@ -181,65 +183,10 @@ class HomeTableViewCell: UITableViewCell {
         }
         
     }
-    private func saveToCoreData(with viewModel: HomeTableViewCellViewModel){
-        
-        if (checkObjectExistInCoreData(title:viewModel.title) == false){
-            let newArticle = ArticleEntity(context: self.context)
-            newArticle.url = viewModel.url ?? ""
-            newArticle.content = viewModel.content
-            newArticle.publishedAt = viewModel.publishedAt
-            newArticle.urlToImage = viewModel.urlToImage
-            newArticle.source = viewModel.sourceName
-            newArticle.title = viewModel.title
-            newArticle.subtitle = viewModel.description
-
-            do{
-                try self.context.save()
-            } catch {
-                
-            }
-        }
-        
-    }
-    
-//    FIXME: NOT WORKING -- DeleteFromCoreData
-    private func deleteFromCoreData(with viewModel : HomeTableViewCellViewModel){
-        
-        let articleToBeDeleted = ArticleEntity(context: self.context)
-        articleToBeDeleted.url = viewModel.url ?? ""
-        articleToBeDeleted.content = viewModel.content
-        articleToBeDeleted.publishedAt = viewModel.publishedAt
-        articleToBeDeleted.urlToImage = viewModel.urlToImage
-        articleToBeDeleted.source = viewModel.sourceName
-        articleToBeDeleted.title = viewModel.title
-        articleToBeDeleted.subtitle = viewModel.description
-        self.context.delete(articleToBeDeleted)
-        do{
-            try context.save()
-        } catch {
-            
-        }
-    }
     
     func checkBookmark (){
         if (bookmarkBool == true){
             bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.purpleLight)
         }
-    }
-    
-    private func checkObjectExistInCoreData(title:String) -> Bool{
-        var items : [ArticleEntity]?
-        do{
-            items = try self.context.fetch(ArticleEntity.fetchRequest())
-        } catch {
-            
-        }
-        
-        for item in items ?? [] {
-            if(item.title == title){
-                return true
-            }
-        }
-        return false
     }
 }
