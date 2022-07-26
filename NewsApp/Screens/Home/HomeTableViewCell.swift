@@ -43,8 +43,6 @@ class HomeTableViewCellViewModel {
 
 class HomeTableViewCell: UITableViewCell {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     var model = HomeTableViewCellViewModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
     // MARK: - Properties
     private let cornerRadiusValue : CGFloat = 16

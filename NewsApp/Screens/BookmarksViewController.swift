@@ -9,8 +9,6 @@ import UIKit
 import CoreData
 
 class BookmarksViewController: UIViewController {
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     //    MARK: - ViewModels
     private var items : [ArticleEntity]?
@@ -55,13 +53,11 @@ class BookmarksViewController: UIViewController {
         
     //    MARK: - Functions
     private func fetchArticlesFromCoreData(){
-        do{
-            self.items = try self.context.fetch(ArticleEntity.fetchRequest())
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        } catch {
-            
+        let coreDataService = CoreDataService()
+        coreDataService.fetchArticlesFromCoreData()
+        items = coreDataService.items
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
         
@@ -109,16 +105,13 @@ class BookmarksViewController: UIViewController {
             if editingStyle == .delete {
                 guard let itemsToBeDeleted = items?[indexPath.row] else { return  }
                 print(itemsToBeDeleted)
-                context.delete(itemsToBeDeleted)
                 items?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                do{
-                    try context.save()
-                    DispatchQueue.main.async {
-                        tableView.reloadData()
-                    }
-                } catch {
-                    
+                
+                let coreDataService = CoreDataService()
+                coreDataService.deleteFromCoreData(with: itemsToBeDeleted)
+                DispatchQueue.main.async {
+                    tableView.reloadData()
                 }
 
             }

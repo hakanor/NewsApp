@@ -75,4 +75,13 @@ class CoreDataService{
             
         }
     }
+    
+    public func deleteFromCoreData(with articleEntity : ArticleEntity){
+        self.context.delete(articleEntity)
+        do{
+            try self.context.save()
+        } catch {
+            
+        }
+    }
 }
