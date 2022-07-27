@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     private var viewModels = [HomeTableViewCellViewModel]()
     private var articles = [Article]()
     private var items : [ArticleEntity]?
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var isSearchResultsEmpty : Bool = false
     
 //    MARK: - Subviews
     private lazy var tableView: UITableView = {
@@ -120,6 +120,9 @@ class HomeViewController: UIViewController {
                     )
                 })
                 DispatchQueue.main.async {
+                    if((self?.viewModels.isEmpty) != nil){
+                        self!.isSearchResultsEmpty = true
+                    }
                     self?.tableView.reloadData()
                 }
             case .failure(let error):
@@ -130,6 +133,7 @@ class HomeViewController: UIViewController {
     
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
         fetchNews()
+        textField.text = ""
         refreshControl.endRefreshing()
     }
     
@@ -187,7 +191,16 @@ class HomeViewController: UIViewController {
 //    MARK: - TableView Delegate & TableView DataSource
 extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModels.count
+        if viewModels.count == 0 && isSearchResultsEmpty {
+            tableView.setEmptyView(title: "We couldn't find any article releated your search.", message: "", messageImage: UIImage(named: "search")!)
+        }
+        else if viewModels.count == 0{
+            tableView.setEmptyView(title: "Loading articles...", message: "", messageImage: UIImage(named: "search")!)
+        }
+        else {
+            tableView.restore()
+        }
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

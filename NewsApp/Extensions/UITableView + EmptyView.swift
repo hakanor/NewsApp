@@ -26,7 +26,7 @@ extension UITableView {
             let titleLabel = UILabel()
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-            titleLabel.textColor = UIColor.black
+            titleLabel.textColor = themeColors.blackPrimary
             titleLabel.numberOfLines = 2
             titleLabel.text = title
             titleLabel.textAlignment = .center
@@ -37,7 +37,7 @@ extension UITableView {
             let messageLabel = UILabel()
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
             messageLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-            messageLabel.textColor = UIColor.lightGray
+            messageLabel.textColor = themeColors.greyPrimary
             messageLabel.numberOfLines = 2
             messageLabel.text = message
             messageLabel.textAlignment = .center
