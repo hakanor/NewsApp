@@ -147,7 +147,12 @@ class HomeTableViewCell: UITableViewCell {
             bookmarkBool = true
             coreDataService.saveToCoreData(with: self.model)
         } else {
-            coreDataService.deleteFromCoreData(with: self.model)
+            for item in coreDataService.items!{
+                if(item.url == self.model.url){
+                    coreDataService.deleteFromCoreData(with: item)
+                }
+            }
+//            coreDataService.deleteFromCoreData(with: self.model)
             bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.greyPrimary)
             bookmarkBool = false
         }
