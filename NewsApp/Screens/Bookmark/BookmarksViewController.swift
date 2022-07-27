@@ -89,7 +89,13 @@ class BookmarksViewController: UIViewController {
 //    MARK: - TableView Delegate & TableView DataSource
 extension BookmarksViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items?.count ?? 0
+        if items!.count == 0 {
+            tableView.setEmptyView(title: "You don't have any bookmarked article.", message: "Your articles will be in here.", messageImage: UIImage(named: "bookmark")!)
+            }
+            else {
+                tableView.restore()
+            }
+        return items!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
