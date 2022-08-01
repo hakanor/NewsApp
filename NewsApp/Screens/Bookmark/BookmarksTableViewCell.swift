@@ -93,6 +93,9 @@ class BookmarksTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        titleLabel.text = ""
+        subtitleLabel.text = ""
+        articleImage.image = nil
     }
     
     // MARK: - Configuration

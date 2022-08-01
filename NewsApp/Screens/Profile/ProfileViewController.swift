@@ -8,8 +8,13 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    // MARK: - Properties
+    var sectionContents = [0: ["Notifications","Language","Change Password"],
+                              1: ["Privacy","Terms & Conditions"],
+                              2: ["Sign Out"]]
+    
             
-    //    MARK: - Subviews
+    // MARK: - Subviews
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +42,7 @@ class ProfileViewController: UIViewController {
     private lazy var profileImage: UIImageView = {
         let profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "kedi")
+        let image = UIImage(named: "profile")
         profileImage.image = image
         profileImage.contentMode = .scaleAspectFill
         profileImage.backgroundColor = themeColors.white
@@ -53,7 +58,7 @@ class ProfileViewController: UIViewController {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textColor = themeColors.blackPrimary
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        nameLabel.text = "Hakan OR"
+        nameLabel.text = "John Doe"
         nameLabel.contentMode = .scaleToFill
         nameLabel.numberOfLines = 1
         return nameLabel
@@ -64,7 +69,7 @@ class ProfileViewController: UIViewController {
         mailLabel.translatesAutoresizingMaskIntoConstraints = false
         mailLabel.textColor = themeColors.greyPrimary
         mailLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        mailLabel.text = "hakanor99@gmail.com"
+        mailLabel.text = "johndoe@gmail.com"
         mailLabel.contentMode = .scaleToFill
         mailLabel.numberOfLines = 1
         return mailLabel
@@ -111,7 +116,7 @@ class ProfileViewController: UIViewController {
         mailLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         mailLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
-        tableView.topAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 32).isActive = true
+        tableView.topAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 10).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
@@ -136,7 +141,15 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section:Int = indexPath.section
+        let row:Int = indexPath.row
+        var imageName = "angle-right"
+        if(sectionContents[section]?[row] == "Sign Out"){
+            imageName = "signout"
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as! ProfileTableViewCell
+        cell.configureCells(title: sectionContents[section]?[row] ?? "" , imageName: imageName)
+        
         return cell
     }
     
@@ -144,6 +157,24 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        sectionContents.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        } else if section == 1 {
+            return 4
+        } else {
+            return 4
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        6
     }
 }

@@ -36,8 +36,8 @@ class ProfileTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textColor = themeColors.blackPrimary
-        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        titleLabel.textColor = themeColors.greyDarker
+        titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         titleLabel.text = "UI/UX Design"
         titleLabel.contentMode = .scaleToFill
         titleLabel.numberOfLines = 1
@@ -63,7 +63,7 @@ class ProfileTableViewCell: UITableViewCell {
   
         labelImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         labelImage.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        labelImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -6).isActive = true
+        labelImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -16).isActive = true
         
         labelImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
         labelImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
@@ -76,11 +76,14 @@ class ProfileTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        titleLabel.text = ""
+        labelImage.image = nil
     }
     
     // MARK: - Configuration
-    func configureCells(with articleEntity: ArticleEntity){
-        
+    func configureCells(title:String , imageName : String){
+        titleLabel.text = title
+        labelImage.image = UIImage(named: imageName)?.withTintColor(themeColors.greyDarker)
     }
     
 }
