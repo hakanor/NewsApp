@@ -52,13 +52,26 @@ class HomeViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         textField.backgroundColor = themeColors.purpleLighter
         textField.leftImage(UIImage(named: "search")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
-//        textField.rightImage(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
-//        FIXME: ADD "searchFunc" to textfield.rightButton
-        textField.rightButton(UIImage(named: "times")?.withTintColor(themeColors.blackDarker), imageWidth: 56, padding: 8)
+
+        // ClearImage for Clear Button on textfield
+        let clearImage = UIImage(named: "times")?.withTintColor(themeColors.blackDarker)
+        let clearImageView = UIImageView(image: clearImage)
+        clearImageView.contentMode = .center
+        clearImageView.tintColor = .black
+        clearImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action:#selector(didTouchClearAllButton(_:)))
+        textField.rightView(clearImageView, width: 56, padding: 8 , tapGesture:tapGesture)
+        
         textField.layer.cornerRadius = 10
         textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
         return textField
        }()
+    
+    @objc private func didTouchClearAllButton(_ sender: UITapGestureRecognizer? = nil) {
+        textField.text = ""
+        fetchNews()
+        tableView.reloadData()
+    }
     
 //    MARK: - Configuration
     func configurateTableView(){
@@ -192,7 +205,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if viewModels.count == 0 && isSearchResultsEmpty {
-            tableView.setEmptyView(title: "We couldn't find any article releated your search.", message: "", messageImage: UIImage(named: "search")!)
+            tableView.setEmptyView(title: "We couldn't find any article related your search.", message: "", messageImage: UIImage(named: "search")!)
         }
         else if viewModels.count == 0{
             tableView.setEmptyView(title: "Loading articles...", message: "", messageImage: UIImage(named: "search")!)

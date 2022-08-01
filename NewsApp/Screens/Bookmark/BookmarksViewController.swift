@@ -83,6 +83,10 @@ class BookmarksViewController: UIViewController {
         tableView.register(BookmarksTableViewCell.self, forCellReuseIdentifier: "BookmarksTableViewCell")
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchArticlesFromCoreData()
+    }
 
 }
 

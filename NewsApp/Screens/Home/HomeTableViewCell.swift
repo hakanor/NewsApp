@@ -159,6 +159,15 @@ class HomeTableViewCell: UITableViewCell {
         
     }
     
+    // TODO: Struct and class diff?
+    // Structs non-inheritable, class inheritable
+    // Structs value type, class referance type
+    // Structs non-mutable, class mutable
+    
+    // TODO: MVC & MVVM
+    // TODO: SOLID - S (Single Responsibility)
+    // ARC
+    
     // no need for that func anymore
     func setHomeTableViewCellLabels(articleImage: UIImage, titleLabel: String){
         self.titleLabel.text = titleLabel

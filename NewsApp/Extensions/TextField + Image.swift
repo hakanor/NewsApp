@@ -35,24 +35,17 @@ extension UITextField {
         rightViewMode = .always
     }
     
-    func rightButton(_ image: UIImage?, imageWidth: CGFloat, padding: CGFloat) {
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: padding, y: 0, width: imageWidth, height: frame.height)
-        imageView.contentMode = .center
-        imageView.tintColor = .black
-        imageView.alpha = 0.5
+    func rightView(_ view: UIView?, width: CGFloat, padding: CGFloat, tapGesture:UITapGestureRecognizer) {
+        guard let view = view else { return }
+
+        view.frame = CGRect(x: 0 , y: 0, width: width, height: frame.height)
+        view.alpha = 0.5
         
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: imageWidth + 2 * padding, height: frame.height))
-        containerView.addSubview(imageView)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action:#selector(didTouchClearAllButton(sender:)))
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: width + 2 * padding, height: frame.height))
+        containerView.addSubview(view)
         containerView.addGestureRecognizer(tapGesture)
         
         rightView = containerView
         rightViewMode = .always
-        
-    }
-    @objc func didTouchClearAllButton(sender: UIButton) {
-        text = ""
     }
 }

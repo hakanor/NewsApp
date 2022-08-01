@@ -24,6 +24,7 @@
 		A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */; };
 		A76437F32888AF8600D2CFF5 /* TextField + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F22888AF8600D2CFF5 /* TextField + Image.swift */; };
 		A76437F628894B1200D2CFF5 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */; };
+		A78449512892B4A7009AFE0B /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78449502892B4A7009AFE0B /* ProfileTableViewCell.swift */; };
 		A7F2322028901D1700CB651D /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F2321F28901D1700CB651D /* CoreDataService.swift */; };
 		A7F232232890303C00CB651D /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F232222890303C00CB651D /* BookmarksTableViewCell.swift */; };
 		A7F2322528916AAF00CB651D /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F2322428916AAF00CB651D /* UITableView + EmptyView.swift */; };
@@ -49,6 +50,7 @@
 		A76437F028889A2400D2CFF5 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
 		A76437F22888AF8600D2CFF5 /* TextField + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField + Image.swift"; sourceTree = "<group>"; };
 		A76437F528894B1200D2CFF5 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		A78449502892B4A7009AFE0B /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A7F2321F28901D1700CB651D /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		A7F232222890303C00CB651D /* BookmarksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewCell.swift; sourceTree = "<group>"; };
 		A7F2322428916AAF00CB651D /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -140,8 +142,8 @@
 			children = (
 				A76437F428894AE600D2CFF5 /* Home */,
 				A7F2322128902FF500CB651D /* Bookmark */,
+				A7F2322628929D8900CB651D /* Profile */,
 				A73F8B382881FA7D0038F31B /* MainViewController.swift */,
-				A73F8B4D2882F0920038F31B /* ProfileViewController.swift */,
 				A74911FB288B3E8C00D51E3D /* ArticleViewController.swift */,
 			);
 			path = Screens;
@@ -163,6 +165,15 @@
 				A7F232222890303C00CB651D /* BookmarksTableViewCell.swift */,
 			);
 			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		A7F2322628929D8900CB651D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A73F8B4D2882F0920038F31B /* ProfileViewController.swift */,
+				A78449502892B4A7009AFE0B /* ProfileTableViewCell.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				A7F2322528916AAF00CB651D /* UITableView + EmptyView.swift in Sources */,
 				A74911FE288C189100D51E3D /* UIImage + Url.swift in Sources */,
 				A7F2322028901D1700CB651D /* CoreDataService.swift in Sources */,
+				A78449512892B4A7009AFE0B /* ProfileTableViewCell.swift in Sources */,
 				A73F8B352881FA7D0038F31B /* AppDelegate.swift in Sources */,
 				A7491201288C982D00D51E3D /* NewsApp.xcdatamodeld in Sources */,
 				A76437F128889A2400D2CFF5 /* UIColor + Hex.swift in Sources */,
@@ -391,6 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RZB5WTQ7UH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -417,6 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RZB5WTQ7UH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
