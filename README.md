@@ -2,7 +2,7 @@
 
 News App brings you the newest articles from multiple sources by using newsapi.org API.\
 It has a bookmark feature which allows you to save articles.\
-Profile page is only coded for the integrity of the design.\
+Profile page is only coded for the integrity of the design.
 
 <ins>Coded programatically.</ins>
 
